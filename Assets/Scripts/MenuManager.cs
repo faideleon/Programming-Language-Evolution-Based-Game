@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,12 +6,14 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
 
-    [SerializeField]private Button nextButton;
+    [SerializeField]public Button nextButton;
     [SerializeField]private GameObject menu;
-    [SerializeField] private GameObject UIContainer;
+   
     [SerializeField] private Button cancelbutton;
+
+    public static event Action onGameStarted;
     private TMP_Text text;
-    private ButtonType buttonType = ButtonType.LOADED;
+    public ButtonType buttonType = ButtonType.LOADED;
     
     private TMP_Text [] menuTexts;
     private bool canReturn =false; //checks if the cancel button can return to previous message
@@ -18,6 +21,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+       
         text = nextButton.GetComponentInChildren<TMP_Text>();
         nextButton.onClick.AddListener(StartGame);
         menuTexts = menu.GetComponentsInChildren<TMP_Text>(true);
@@ -26,11 +30,10 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        
-       
-
-        
+      
     }
+
+   
 
     void BackGame()
     {
@@ -85,8 +88,10 @@ public class MenuManager : MonoBehaviour
             {
                
                 Time.timeScale = 1f;
-                UIContainer.SetActive(false);
+                menu.SetActive(false);
                 buttonType = ButtonType.START;
+
+            onGameStarted?.Invoke();
             }
        
 
