@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,9 +7,10 @@ public class PlayerChest : MonoBehaviour
 {
     public Sprite imgOpened;
     public Sprite imgClosed;
-
+    public bool chestHasBeenOpened;
     private bool isOpened = false;
     private GameObject chest;
+    public static event Action firstKey;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,8 +30,10 @@ public class PlayerChest : MonoBehaviour
             {
                 if (!isOpened)
                 {
+                    chestHasBeenOpened = true;
                     isOpened = true;
                     chest.GetComponent<SpriteRenderer>().sprite = imgOpened;
+                    StartCoroutine(timerRoutineForChest());
                 }
                 else
                 {
@@ -39,6 +44,13 @@ public class PlayerChest : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator timerRoutineForChest()
+    {
+        yield return new WaitForSeconds(0.5f);
+        firstKey?.Invoke();
+    }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {

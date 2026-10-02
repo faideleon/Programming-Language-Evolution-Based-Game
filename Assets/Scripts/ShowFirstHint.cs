@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShowFirstHint : MonoBehaviour
 {
-    [SerializeField] private GameObject gameManager;
+    
     [SerializeField] private GameObject UI;
     [SerializeField] private Button backButton;
 
@@ -17,12 +19,18 @@ public class ShowFirstHint : MonoBehaviour
     {
         
         GameTimer.ShowFirstHint += GameTimer_ShowFirstHint;
+        
     }
 
     private void OnDisable()
     {
         GameTimer.ShowFirstHint -= GameTimer_ShowFirstHint;
+        
     }
+
+    
+
+    
 
     private void GameTimer_ShowFirstHint()
     {
