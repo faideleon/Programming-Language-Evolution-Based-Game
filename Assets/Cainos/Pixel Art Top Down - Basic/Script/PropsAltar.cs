@@ -8,6 +8,8 @@ namespace Cainos.PixelArtTopDown_Basic
 
     public class PropsAltar : MonoBehaviour
     {
+
+        [SerializeField] BoxToAltar boxAltar;
         public List<SpriteRenderer> runes;
         public float lerpSpeed;
 

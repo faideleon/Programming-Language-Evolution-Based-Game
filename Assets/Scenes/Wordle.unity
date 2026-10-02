@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 775334368}
-  - component: {fileID: 775334367}
+  - component: {fileID: 775334369}
   m_Layer: 0
   m_Name: WordleGame
   m_TagString: Untagged
@@ -136,7 +136,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &775334367
+--- !u!4 &775334368
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775334366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &775334369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,42 +168,36 @@ MonoBehaviour:
   showHint: 1
   closeSceneOnFinish: 0
   words:
-  - word: ABACUS
-    category: Ancient Computing
-    hint: The oldest counting tool, made of beads
-  - word: COBOL
-    category: Ancient Language
-    hint: Old business language from 1959
-  - word: BASIC
-    category: Ancient Language
-    hint: Beginner's All-purpose Symbolic Instruction Code
-  - word: LISP
-    category: Ancient Language
-    hint: Old AI language full of (parentheses)
-  - word: PASCAL
-    category: Ancient Language
-    hint: Named after a French mathematician
-  - word: ALGOL
-    category: Ancient Language
-    hint: ALGOrithmic Language from 1958
-  - word: LOGO
-    category: Ancient Language
-    hint: The language with the drawing turtle
   - word: ADA
-    category: Ancient Language
-    hint: Named after the first programmer, Lovelace
-  - word: ENIAC
-    category: Ancient Computing
-    hint: One of the first giant electronic computers
+    category: Ancient Programming
+    hint: ___ Lovelace designed early algorithms
   - word: PUNCH
-    category: Ancient Computing
-    hint: Old programs were ___ cards
-  - word: PROLOG
-    category: Ancient Language
-    hint: Old logic programming language
+    category: Ancient Programming
+    hint: Programs were stored on ___ cards
+  - word: CARDS
+    category: Ancient Programming
+    hint: Holes were punched into paper ___
+  - word: PAPER
+    category: Ancient Programming
+    hint: Early algorithms were ___-based
+  - word: HOLES
+    category: Ancient Programming
+    hint: Patterned ___ punched into cards
+  - word: TOGGLE
+    category: Ancient Programming
+    hint: ___ switches were flipped to program
   - word: BINARY
-    category: Ancient Computing
-    hint: Only 0s and 1s
+    category: Ancient Programming
+    hint: Raw ___ methods, only 0s and 1s
+  - word: PATCH
+    category: Ancient Programming
+    hint: Players rewire ___ panels
+  - word: PANELS
+    category: Ancient Programming
+    hint: Rewiring patch ___
+  - word: PATHS
+    category: Ancient Programming
+    hint: Engineers routed electrical ___
   - word: MOV
     category: Assembly
     hint: Copies a value into a register
@@ -231,21 +240,6 @@ MonoBehaviour:
   - word: LOAD
     category: Assembly
     hint: Read a value from memory
---- !u!4 &775334368
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775334366}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

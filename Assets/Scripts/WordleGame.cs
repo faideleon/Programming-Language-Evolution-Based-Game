@@ -32,6 +32,10 @@ public class WordleGame : MonoBehaviour
 
     public static event Action<bool> onWordleFinished; // true = solved
 
+    // Set this before loading the scene to only use some words, e.g. "Ancient" or "Assembly".
+    // Leave it empty to use every word.
+    public static string categoryFilter = "";
+
     [SerializeField] private TMP_FontAsset font;
     [SerializeField] private int maxGuesses = 6;
     [SerializeField] private bool showHint = true;
@@ -39,19 +43,17 @@ public class WordleGame : MonoBehaviour
 
     [SerializeField] private List<WordEntry> words = new List<WordEntry>
     {
-        // Ancient programming languages / early computing
-        new WordEntry("ABACUS", "Ancient Computing", "The oldest counting tool, made of beads"),
-        new WordEntry("COBOL",  "Ancient Language",  "Old business language from 1959"),
-        new WordEntry("BASIC",  "Ancient Language",  "Beginner's All-purpose Symbolic Instruction Code"),
-        new WordEntry("LISP",   "Ancient Language",  "Old AI language full of (parentheses)"),
-        new WordEntry("PASCAL", "Ancient Language",  "Named after a French mathematician"),
-        new WordEntry("ALGOL",  "Ancient Language",  "ALGOrithmic Language from 1958"),
-        new WordEntry("LOGO",   "Ancient Language",  "The language with the drawing turtle"),
-        new WordEntry("ADA",    "Ancient Language",  "Named after the first programmer, Lovelace"),
-        new WordEntry("ENIAC",  "Ancient Computing", "One of the first giant electronic computers"),
-        new WordEntry("PUNCH",  "Ancient Computing", "Old programs were ___ cards"),
-        new WordEntry("PROLOG", "Ancient Language",  "Old logic programming language"),
-        new WordEntry("BINARY", "Ancient Computing", "Only 0s and 1s"),
+        // Phase 1: words from the ancient programming lesson
+        new WordEntry("ADA",    "Ancient Programming", "___ Lovelace designed early algorithms"),
+        new WordEntry("PUNCH",  "Ancient Programming", "Programs were stored on ___ cards"),
+        new WordEntry("CARDS",  "Ancient Programming", "Holes were punched into paper ___"),
+        new WordEntry("PAPER",  "Ancient Programming", "Early algorithms were ___-based"),
+        new WordEntry("HOLES",  "Ancient Programming", "Patterned ___ punched into cards"),
+        new WordEntry("TOGGLE", "Ancient Programming", "___ switches were flipped to program"),
+        new WordEntry("BINARY", "Ancient Programming", "Raw ___ methods, only 0s and 1s"),
+        new WordEntry("PATCH",  "Ancient Programming", "Players rewire ___ panels"),
+        new WordEntry("PANELS", "Ancient Programming", "Rewiring patch ___"),
+        new WordEntry("PATHS",  "Ancient Programming", "Engineers routed electrical ___"),
 
         // Assembly language terms
         new WordEntry("MOV",    "Assembly", "Copies a value into a register"),
@@ -106,6 +108,10 @@ public class WordleGame : MonoBehaviour
         if (font == null) font = TMP_Settings.defaultFontAsset;
         // Keep only valid words (letters only, 6 or fewer)
         words.RemoveAll(w => w == null || string.IsNullOrEmpty(w.word) || w.word.Length > MaxWordLength);
+        if (categoryFilter != "")
+        {
+            words.RemoveAll(w => w.category.Contains(categoryFilter) == false);
+        }
 
         EnsureCameraAndEventSystem();
         BuildUI();

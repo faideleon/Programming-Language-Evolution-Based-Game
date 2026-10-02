@@ -1,41 +1,30 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShowFirstHint : MonoBehaviour
 {
-    
     [SerializeField] private GameObject UI;
     [SerializeField] private Button backButton;
 
+    private UIDialog hint;
 
-    private void Start()
+    private void Awake()
     {
-        backButton.onClick.AddListener(() => UI.SetActive(false));
+        hint = new UIDialog(UI, backButton);
     }
 
     private void OnEnable()
     {
-        
         GameTimer.ShowFirstHint += GameTimer_ShowFirstHint;
-        
     }
 
     private void OnDisable()
     {
         GameTimer.ShowFirstHint -= GameTimer_ShowFirstHint;
-        
     }
-
-    
-
-    
 
     private void GameTimer_ShowFirstHint()
     {
-        Debug.Log("Invoked");
-        UI.SetActive(true);
-       
+        hint.Show();
     }
 }
