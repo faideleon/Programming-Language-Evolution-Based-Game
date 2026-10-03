@@ -55,21 +55,16 @@ public class WordleGame : MonoBehaviour
         new WordEntry("PANELS", "Ancient Programming", "Rewiring patch ___"),
         new WordEntry("PATHS",  "Ancient Programming", "Engineers routed electrical ___"),
 
-        // Assembly language terms
-        new WordEntry("MOV",    "Assembly", "Copies a value into a register"),
-        new WordEntry("ADD",    "Assembly", "Sums two values"),
-        new WordEntry("JMP",    "Assembly", "Jumps to another address"),
-        new WordEntry("PUSH",   "Assembly", "Puts a value on top of the stack"),
-        new WordEntry("POP",    "Assembly", "Takes a value off the stack"),
-        new WordEntry("CALL",   "Assembly", "Runs a subroutine"),
-        new WordEntry("NOP",    "Assembly", "No OPeration - does nothing"),
-        new WordEntry("STACK",  "Assembly", "Last in, first out memory"),
-        new WordEntry("BYTE",   "Assembly", "Eight bits"),
-        new WordEntry("LABEL",  "Assembly", "A name marking a spot in code"),
-        new WordEntry("HALT",   "Assembly", "Stops the processor"),
-        new WordEntry("OPCODE", "Assembly", "The number that tells the CPU what to do"),
-        new WordEntry("MEMORY", "Assembly", "Where data is stored, like RAM"),
-        new WordEntry("LOAD",   "Assembly", "Read a value from memory"),
+        // Phase 3: words from the assembly lesson
+        new WordEntry("MOV",    "Assembly", "Copies a number into a register"),
+        new WordEntry("ADD",    "Assembly", "Adds two numbers"),
+        new WordEntry("SUB",    "Assembly", "Subtracts one number from another"),
+        new WordEntry("JMP",    "Assembly", "Jumps to another line of code"),
+        new WordEntry("NOP",    "Assembly", "Does nothing"),
+        new WordEntry("HALT",   "Assembly", "Stops the computer"),
+        new WordEntry("PUSH",   "Assembly", "Puts a number on the stack"),
+        new WordEntry("POP",    "Assembly", "Takes the top number off the stack"),
+        new WordEntry("STACK",  "Assembly", "A pile of numbers, like a pile of plates"),
     };
 
     private static readonly Color BgColor       = new Color32(10, 10, 12, 252);

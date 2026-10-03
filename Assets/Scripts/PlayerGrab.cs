@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cainos.PixelArtTopDown_Basic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,12 +11,66 @@ public class PlayerGrab : MonoBehaviour
 
     private float originalSpeed;
 
+    // The box's weight, remembered while carrying it (the Rigidbody is removed while carried)
+    private float boxMass = 10f;
+    private float boxDamping = 10f;
+
     public List<GameObject> nearbyBoxes = new List<GameObject>();
+
+    // How fast the player slides to the middle of the stairs while carrying a box
+    [SerializeField] private float stairsCenterSpeed = 3f;
+    private StairsLayerTrigger[] stairs;
+    private Rigidbody2D rb;
 
     private void Start()
     {
         movement = GetComponent<PlayerMovement>();
+        rb = GetComponent<Rigidbody2D>();
         originalSpeed = movement.moveSpeed;
+        stairs = FindObjectsByType<StairsLayerTrigger>(FindObjectsSortMode.None);
+    }
+
+    private void FixedUpdate()
+    {
+        if (isGrabbing)
+        {
+            LineUpWithStairs();
+        }
+    }
+
+    // While carrying a box the player can only walk in one direction, so they can't
+    // step sideways to fit the box through the stairs.
+    // So when they carry a box up or down stairs, we slowly slide them to the middle of the stairs.
+    private void LineUpWithStairs()
+    {
+        // Only when walking up or down
+        bool walkingUpOrDown = movement.lockedDirection == PlayerDirection.NORTH || movement.lockedDirection == PlayerDirection.SOUTH;
+        if (walkingUpOrDown == false || rb.linearVelocity.y == 0)
+        {
+            return;
+        }
+
+        foreach (StairsLayerTrigger stair in stairs)
+        {
+            // Only stairs that go up and down
+            if (stair.direction != StairsLayerTrigger.Direction.South)
+            {
+                continue;
+            }
+
+            Vector2 stairPosition = stair.transform.position;
+            float distanceUpDown = Mathf.Abs(rb.position.y - stairPosition.y);
+            float distanceSideways = Mathf.Abs(rb.position.x - stairPosition.x);
+
+            // Is the player close to these stairs?
+            if (distanceUpDown < 4f && distanceSideways < 1.4f)
+            {
+                Vector2 newPosition = rb.position;
+                newPosition.x = Mathf.MoveTowards(rb.position.x, stairPosition.x, stairsCenterSpeed * Time.fixedDeltaTime);
+                rb.position = newPosition;
+                return;
+            }
+        }
     }
 
     private void Update()
@@ -59,8 +114,21 @@ public class PlayerGrab : MonoBehaviour
                 isGrabbing = true;
                 box.transform.SetParent(this.transform);
 
-                Destroy(box.GetComponent<Rigidbody2D>());
-                movement.moveSpeed = 2f;
+                Rigidbody2D boxRB = box.GetComponent<Rigidbody2D>();
+                boxMass = boxRB.mass;
+                boxDamping = boxRB.linearDamping;
+                Destroy(boxRB);
+
+                // Stone boxes are heavy, so the player walks slower with them
+                StoneBox stoneBox = box.GetComponent<StoneBox>();
+                if (stoneBox != null)
+                {
+                    movement.moveSpeed = stoneBox.carrySpeed;
+                }
+                else
+                {
+                    movement.moveSpeed = 2f;
+                }
 
                 movement.isHoldingBox = true;
                 movement.lockedDirection = movement.playerDirection;
@@ -71,8 +139,8 @@ public class PlayerGrab : MonoBehaviour
                 Rigidbody2D newRB = box.AddComponent<Rigidbody2D>();
                 newRB.bodyType = RigidbodyType2D.Dynamic;
                 newRB.gravityScale = 0f;
-                newRB.mass = 10f;
-                newRB.linearDamping = 10f;
+                newRB.mass = boxMass;
+                newRB.linearDamping = boxDamping;
                 newRB.freezeRotation = true;
 
                 isGrabbing = false;

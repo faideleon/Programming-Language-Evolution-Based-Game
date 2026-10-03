@@ -200,46 +200,31 @@ MonoBehaviour:
     hint: Engineers routed electrical ___
   - word: MOV
     category: Assembly
-    hint: Copies a value into a register
+    hint: Copies a number into a register
   - word: ADD
     category: Assembly
-    hint: Sums two values
+    hint: Adds two numbers
+  - word: SUB
+    category: Assembly
+    hint: Subtracts one number from another
   - word: JMP
     category: Assembly
-    hint: Jumps to another address
-  - word: PUSH
-    category: Assembly
-    hint: Puts a value on top of the stack
-  - word: POP
-    category: Assembly
-    hint: Takes a value off the stack
-  - word: CALL
-    category: Assembly
-    hint: Runs a subroutine
+    hint: Jumps to another line of code
   - word: NOP
     category: Assembly
-    hint: No OPeration - does nothing
-  - word: STACK
-    category: Assembly
-    hint: Last in, first out memory
-  - word: BYTE
-    category: Assembly
-    hint: Eight bits
-  - word: LABEL
-    category: Assembly
-    hint: A name marking a spot in code
+    hint: Does nothing
   - word: HALT
     category: Assembly
-    hint: Stops the processor
-  - word: OPCODE
+    hint: Stops the computer
+  - word: PUSH
     category: Assembly
-    hint: The number that tells the CPU what to do
-  - word: MEMORY
+    hint: Puts a number on the stack
+  - word: POP
     category: Assembly
-    hint: Where data is stored, like RAM
-  - word: LOAD
+    hint: Takes the top number off the stack
+  - word: STACK
     category: Assembly
-    hint: Read a value from memory
+    hint: A pile of numbers, like a pile of plates
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

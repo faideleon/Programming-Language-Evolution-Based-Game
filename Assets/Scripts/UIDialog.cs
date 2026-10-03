@@ -159,6 +159,15 @@ public class UIDialog
         UpdatePage();
     }
 
+    // Replaces all the pages, for example to reuse the same panel for a new lesson
+    public void SetMessages(string[] newMessages)
+    {
+        messages = newMessages;
+        pageCount = newMessages.Length;
+        currentPage = 0;
+        UpdatePage();
+    }
+
     public bool IsFirstPage()
     {
         return currentPage == 0;
