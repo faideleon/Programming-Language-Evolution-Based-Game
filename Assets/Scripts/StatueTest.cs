@@ -10,6 +10,7 @@ public class StatueTest : MonoBehaviour
 {
     [SerializeField] private Color phase1Color = new Color(1f, 0.85f, 0.3f);   // gold
     [SerializeField] private Color phase3Color = new Color(0.55f, 0.85f, 1f);  // light blue
+    [SerializeField] private Color finishedColor = new Color(0.6f, 1f, 0.6f);  // green, when the game is finished
     [SerializeField] private float colorSpeed = 2f;
 
     // Called every time the player walks up to the statue
@@ -32,6 +33,7 @@ public class StatueTest : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.onPhaseChanged += OnPhaseChanged;
         AncientLessonScript.onLessonFinished += OnAncientLessonFinished;
         AssemblyLessonScript.onLessonFinished += OnAssemblyLessonFinished;
         WordleGame.onWordleFinished += OnWordleFinished;
@@ -40,6 +42,7 @@ public class StatueTest : MonoBehaviour
 
     private void OnDisable()
     {
+        GameManager.onPhaseChanged -= OnPhaseChanged;
         AncientLessonScript.onLessonFinished -= OnAncientLessonFinished;
         AssemblyLessonScript.onLessonFinished -= OnAssemblyLessonFinished;
         WordleGame.onWordleFinished -= OnWordleFinished;
@@ -50,6 +53,15 @@ public class StatueTest : MonoBehaviour
     {
         // Slowly change the statue to its new color after passing a test
         statueSprite.color = Color.Lerp(statueSprite.color, targetColor, colorSpeed * Time.deltaTime);
+    }
+
+    // The statue turns green when the whole game is finished
+    private void OnPhaseChanged(int phase)
+    {
+        if (phase == 5)
+        {
+            targetColor = finishedColor;
+        }
     }
 
     private void OnAncientLessonFinished()

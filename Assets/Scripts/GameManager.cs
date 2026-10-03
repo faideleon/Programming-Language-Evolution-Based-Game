@@ -5,7 +5,8 @@ using UnityEngine;
 //   Phase 1: Ancient Programming Languages
 //   Phase 2: Machine Code
 //   Phase 3: Assembly Language
-//   Phase 4: coming soon
+//   Phase 4: High-Level Languages
+//   Phase 5: the game is finished
 //
 // Other scripts read GameManager.currentPhase, or listen to onPhaseChanged
 // to change their messages when a new phase starts.

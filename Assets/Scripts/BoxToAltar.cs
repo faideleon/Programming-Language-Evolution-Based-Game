@@ -6,6 +6,7 @@ using UnityEngine.UI;
 // Phase 1: bring a WOODEN box. Dropping it on the altar shows the ancient lesson.
 // Phase 2: the altar has nothing to do, it tells the player to finish phase 2.
 // Phase 3: bring a STONE box. Dropping it on the altar shows the assembly lesson.
+// Phase 4: the altar has nothing to do, it tells the player to finish phase 4.
 // After a lesson, walking to the altar shows that lesson again.
 // Every time a lesson ends, the popup tells the player to go to the statue.
 public class BoxToAltar : MonoBehaviour
@@ -25,7 +26,8 @@ public class BoxToAltar : MonoBehaviour
     private string phase2Message = "The altar is sleeping. Finish phase 2 first: find the glowing numbers and set the lanterns by the statue.";
     private string phase3Message = "Bring a stone box to the altar to unlock phase 3: Assembly Language. Stone boxes are heavy!";
     private string phase3StatueMessage = "Go to the statue with four pillars to take a test to pass phase 3: Assembly Language.";
-    private string doneMessage = "The altar has taught you everything for now. Phase 4 is coming soon!";
+    private string phase4Message = "The altar is sleeping. Finish phase 4 first: find the glowing code words on the map.";
+    private string doneMessage = "The altar has taught you everything. Thank you for playing!";
 
     private void Start()
     {
@@ -83,6 +85,10 @@ public class BoxToAltar : MonoBehaviour
                     dialog.Hide();
                     assemblyLesson.Show();
                 }
+            }
+            else if (phase == 4)
+            {
+                ShowMessage(phase4Message);
             }
             else
             {

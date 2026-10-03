@@ -14,7 +14,8 @@ public class ChestOpenedHint : MonoBehaviour
 
     private string phase2Hint = "Phase 2: Machine Code\n\nHint: Find the 4 glowing numbers, then set the lanterns by the statue";
     private string phase3Hint = "Phase 3: Assembly Language\n\nHint: Go to the altar and bring a stone box";
-    private string phase4Hint = "You finished 3 phases!\n\nPhase 4 is coming soon";
+    private string phase4Hint = "Phase 4: High-Level Languages\n\nHint: Find the 4 glowing code words on the map";
+    private string endHint = "You finished all 4 phases!\n\nYou are free!";
 
     private void Awake()
     {
@@ -49,12 +50,16 @@ public class ChestOpenedHint : MonoBehaviour
         {
             chestText.text = phase4Hint;
         }
+        else if (phase == 5)
+        {
+            chestText.text = endHint;
+        }
     }
 
     private void showHint()
     {
-        // In phase 2 the chest opens the machine code quiz instead
-        if (MachineCodePhase.quizReady == true)
+        // In phase 2 and 4 the chest opens the quiz instead
+        if (MachineCodePhase.quizReady == true || HighLevelPhase.quizReady == true)
         {
             return;
         }
