@@ -12,7 +12,6 @@ public enum PlayerDirection
 
 public class PlayerMovement : MonoBehaviour
 {
-    Ray ray = new Ray();
     public float moveSpeed = 5f;
     public PlayerDirection playerDirection;
 

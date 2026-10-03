@@ -28,6 +28,7 @@ public class WordPickup : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            SoundManager.PlayPickup();
             phase.OnWordFound(word);
             gameObject.SetActive(false);
         }

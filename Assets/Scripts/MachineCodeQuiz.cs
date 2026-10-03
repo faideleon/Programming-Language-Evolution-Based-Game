@@ -176,12 +176,14 @@ public class MachineCodeQuiz : MonoBehaviour
         if (answer == q.correctAnswer)
         {
             score = score + 1;
+            SoundManager.PlayCorrect();
             feedbackText.text = "Correct! " + q.explanation;
             feedbackText.color = new Color(0.6f, 0.95f, 0.6f);
         }
         else
         {
             answerButtons[answer].GetComponent<Image>().color = wrongColor;
+            SoundManager.PlayWrong();
             feedbackText.text = "Not quite. " + q.explanation;
             feedbackText.color = new Color(1f, 0.6f, 0.55f);
         }

@@ -68,6 +68,7 @@ public class BinaryLantern : MonoBehaviour
             }
 
             Refresh();
+            SoundManager.PlayLantern();
             phase.OnLanternChanged();
         }
     }

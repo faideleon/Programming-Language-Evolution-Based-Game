@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,11 +9,13 @@ using UnityEngine.UI;
 // 1. When phase 4 starts (after the assembly Wordle), the lesson is shown.
 // 2. The player finds the 4 glowing code words on the map (WordPickup).
 // 3. When all 4 are found, the typed quiz opens at the chest or the statue (TypedQuiz).
-// 4. Passing the quiz finishes the game.
+// 4. Passing the quiz finishes the game. After the last popup, the ending video plays.
 public class HighLevelPhase : MonoBehaviour
 {
     // True when the quiz can be taken. The chest uses this to skip its hint.
     public static bool quizReady = false;
+    // Called when the player closes the very last popup (EndingVideo listens to this)
+    public static event Action onGameFinished;
 
     [Header("Lesson popup")]
     [SerializeField] private GameObject lessonPanel;
@@ -39,6 +42,7 @@ public class HighLevelPhase : MonoBehaviour
     private bool phaseFourDone = false;
     private bool showingFirstLesson = false;
     private bool showingAllFoundMessage = false;
+    private bool showingEndMessages = false;
 
     private int wordsFound = 0;
     private string foundList = "";
@@ -150,6 +154,7 @@ public class HighLevelPhase : MonoBehaviour
         {
             searching = false;
             quizReady = true;
+            SoundManager.PlayCorrect();
 
             string[] messages = new string[2];
             messages[0] = "You found all 4 code words: " + foundList + ".";
@@ -199,6 +204,7 @@ public class HighLevelPhase : MonoBehaviour
             messages[0] = "Phase 4 complete! You can now read high-level code.";
             messages[1] = "You learned it all: machine code, assembly, and high-level languages.";
             messages[2] = "You escaped the trapped place. Thank you for playing!";
+            showingEndMessages = true;
             ShowMessages(messages);
 
             // Phase 5 means the game is finished
@@ -221,6 +227,12 @@ public class HighLevelPhase : MonoBehaviour
         {
             showingFirstLesson = false;
             ShowPrompt("Find the 4 glowing code words on the map!");
+        }
+
+        if (showingEndMessages == true)
+        {
+            showingEndMessages = false;
+            onGameFinished?.Invoke();
         }
 
         if (showingAllFoundMessage == true)

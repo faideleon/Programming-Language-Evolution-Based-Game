@@ -244,6 +244,8 @@ public class WordleGame : MonoBehaviour
     private void EndGame(bool won, string msg)
     {
         gameOver = true;
+        if (won) SoundManager.PlayCorrect();
+        else SoundManager.PlayWrong();
         ShowMessage(msg, persistent: true);
         endButtons.SetActive(true);
         onWordleFinished?.Invoke(won);

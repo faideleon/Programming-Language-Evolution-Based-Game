@@ -126,6 +126,7 @@ public class UIDialog
 
     public void Next()
     {
+        SoundManager.PlayClick();
         if (IsLastPage())
         {
             Hide();
@@ -140,6 +141,7 @@ public class UIDialog
 
     public void Back()
     {
+        SoundManager.PlayClick();
         if (IsFirstPage())
         {
             Hide();

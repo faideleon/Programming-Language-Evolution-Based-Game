@@ -27,7 +27,7 @@ public class PlayerGrab : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
         originalSpeed = movement.moveSpeed;
-        stairs = FindObjectsByType<StairsLayerTrigger>(FindObjectsSortMode.None);
+        stairs = FindObjectsByType<StairsLayerTrigger>();
     }
 
     private void FixedUpdate()
@@ -132,6 +132,7 @@ public class PlayerGrab : MonoBehaviour
 
                 movement.isHoldingBox = true;
                 movement.lockedDirection = movement.playerDirection;
+                SoundManager.PlayGrab();
             }
             else if (isGrabbing && box != null)
             {
@@ -148,6 +149,7 @@ public class PlayerGrab : MonoBehaviour
 
                 movement.moveSpeed = originalSpeed;
                 movement.isHoldingBox = false;
+                SoundManager.PlayDrop();
             }
         }
     }

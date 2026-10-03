@@ -33,6 +33,7 @@ public class PlayerChest : MonoBehaviour
                     chestHasBeenOpened = true;
                     isOpened = true;
                     chest.GetComponent<SpriteRenderer>().sprite = imgOpened;
+                    SoundManager.PlayChestOpen();
                     StartCoroutine(timerRoutineForChest());
                 }
                 else

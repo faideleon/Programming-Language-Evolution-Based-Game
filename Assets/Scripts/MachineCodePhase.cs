@@ -184,6 +184,7 @@ public class MachineCodePhase : MonoBehaviour
         }
 
         // All lanterns are right!
+        SoundManager.PlayCorrect();
         puzzleActive = false;
         quizReady = true;
         UpdateProgress();

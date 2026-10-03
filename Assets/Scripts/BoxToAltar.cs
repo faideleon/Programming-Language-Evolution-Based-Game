@@ -126,6 +126,7 @@ public class BoxToAltar : MonoBehaviour
         if (phase == 1 && woodenBoxPlaced == false && isStoneBox == false)
         {
             woodenBoxPlaced = true;
+            SoundManager.PlayCorrect();
             dialog.Hide();
             lesson.Show();
         }
@@ -134,6 +135,7 @@ public class BoxToAltar : MonoBehaviour
         if (phase == 3 && stoneBoxPlaced == false && isStoneBox == true)
         {
             stoneBoxPlaced = true;
+            SoundManager.PlayCorrect();
             dialog.Hide();
             assemblyLesson.Show();
         }

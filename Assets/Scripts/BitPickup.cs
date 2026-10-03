@@ -33,6 +33,7 @@ public class BitPickup : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            SoundManager.PlayPickup();
             phase.OnBitFound(lanternNumber);
             gameObject.SetActive(false);
         }
